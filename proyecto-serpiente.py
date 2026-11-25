@@ -28,14 +28,13 @@ while Game_on: #para mantener el juego corriendo
             
         if event.type == pygame.KEYDOWN: #para el movimiento de la serpiente y lee las flechas del teclado
             print(pygame.key.name(event.key))
-            if event.key==pygame.K_UP:
+            if event.key==pygame.K_UP and direccion!=(0,Tamaño):
                 direccion=(0,-Tamaño)
-            
-            if event.key==pygame.K_DOWN:
+            if event.key==pygame.K_DOWN and direccion!=(0,-Tamaño):
                 direccion=(0,Tamaño)
-            if event.key==pygame.K_LEFT:
+            if event.key==pygame.K_LEFT and direccion!=(Tamaño,0):
                 direccion=(-Tamaño,0)
-            if event.key==pygame.K_RIGHT:
+            if event.key==pygame.K_RIGHT and direccion!=(-Tamaño,0):
                 direccion=(Tamaño,0)
             
     
@@ -43,6 +42,14 @@ while Game_on: #para mantener el juego corriendo
     cabeza=serpiente[0]
     x=cabeza[0]+direccion[0]
     y=cabeza[1]+direccion[1] #nueva posicion de la cabeza de la serpiente
+    if x<0:
+        Game_on=False
+    if x>700-Tamaño:
+        Game_on=False
+    if y<0:
+        Game_on=False
+    if y>400-Tamaño:
+        Game_on=False
     serpiente.insert(0, (x, y))
     serpiente.pop()
     screen.fill((20, 20, 20)) 
